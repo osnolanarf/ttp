@@ -1,0 +1,14 @@
+Title: Process dump via comsvcs DLL
+
+Description: Detects process memory dump via comsvcs.dll and rundll32.
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_susp_comsvcs_procdump.yml
+
+MITRE ATT&CK: 
+	Tactics: credential access
+	Techniques: t1003
+
+Detection:
+	PaloAlto XDR BIOC:
+		Process  [ action type = execution  AND name = rundll32.exe  AND cmd = *comsvcs*MiniDump*full*|*comsvcs*MiniDumpW*full* ]
+	
