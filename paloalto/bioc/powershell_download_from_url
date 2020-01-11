@@ -1,0 +1,13 @@
+Title: PowerShell Download from URL			>>> ENAGAS - TH - PowerShell Download from URL
+
+Description: PowerShell Download from URL. Detects a Powershell process that contains download commands in its command line string.
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_powershell_download.yml
+
+MITRE ATT&CK: 
+	Tactics: execution
+	Techniques: t1086
+
+Detection:
+	PaloAlto XDR BIOC:
+		Process  [ action type = execution  AND name = powersehll.exe  AND cmd = *.WebClient).DownloadString(*|*new-object system.net.webclient).downloadfile(*|*new-object net.webclient).downloadstring(*  ]
