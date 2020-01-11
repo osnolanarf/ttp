@@ -1,0 +1,23 @@
+Title: Process dump via comsvcs DLL
+
+Description: Detects process memory dump via comsvcs.dll and rundll32.
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_susp_comsvcs_procdump.yml
+
+MITRE ATT&CK: 
+	Tactics: credential access
+	Techniques: t1003
+
+Detection:
+  McAfee ENS Expert Rule:
+		Rule {
+			Process {
+				Include OBJECT_NAME { -v "rundll32.exe" }
+				Include PROCESS_CMD_LINE { -v "*comsvcs*MiniDump*full*" }
+				Include PROCESS_CMD_LINE { -v "*comsvcs*MiniDumpW*full*" }
+
+					}
+			Target {
+				Match SECTION { Include -access "CREATE" }
+					}
+			}		
