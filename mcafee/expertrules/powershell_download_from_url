@@ -1,0 +1,22 @@
+Title: PowerShell Download from URL
+
+Description: PowerShell Download from URL. Detects a Powershell process that contains download commands in its command line string
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_powershell_download.yml
+
+MITRE ATT&CK: 
+	Tactics: execution
+	Techniques: t1086
+
+Detection:
+  McAfee ENS Expert Rule:
+    Rule {
+			Process {
+				Include OBJECT_NAME { -v "powershell.exe" }
+				Include PROCESS_CMD_LINE { -v "*.WebClient).DownloadString(*" }
+					}
+			Target {
+				Match SECTION { Include -access "EXECUTE" }
+					}
+			}
+ 
