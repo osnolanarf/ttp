@@ -1,0 +1,24 @@
+Title: Remote Execution via WMIC
+
+Description: Identifies use of wmic.exe to run commands on remote hosts.
+
+References: https://eqllib.readthedocs.io/en/latest/analytics/07b1481c-2a20-4274-a64e-effcd40941a5.html
+
+MITRE ATT&CK: 
+	Tactics: Lateral Movement, Execution
+	Techniques: T1047 Windows Management Instrumentation
+
+Detection:
+  McAfee ENS Expert Rule:
+    Rule {
+			Process {
+				Include OBJECT_NAME { -v "wmic.exe" }
+				Include PROCESS_CMD_LINE { -v "*/node:*" }
+				Include PROCESS_CMD_LINE { -v "* -node:*" }
+				Include PROCESS_CMD_LINE { -v "* *process* call *" }
+					}
+			Target {
+				Match SECTION { Include -access "CREATE" }
+					}
+			}
+  
