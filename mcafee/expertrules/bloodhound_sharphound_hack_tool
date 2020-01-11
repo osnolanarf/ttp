@@ -1,1 +1,27 @@
 Title: Bloodhound and Sharphound hack tool
+
+Description: Detects command line parameters used by Bloodhound and Sharphound hack tools/Detecta los parámetros de la línea de comandos utilizados por las herramientas de hacking Bloodhound y Sharphound
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_hack_bloodhound.yml
+
+MITRE ATT&CK: 
+	Tactics: discovery
+	Techniques: t1087
+
+Detection:
+  McAfee ENS Expert Rule:
+    Rule {
+			Process {
+				Include OBJECT_NAME { -v "Bloodhound.exe" }
+				Include OBJECT_NAME { -v "SharpHound.exe" }
+				Include PROCESS_CMD_LINE { -v "*-CollectionMethod All*" }
+				Include PROCESS_CMD_LINE { -v "*.exe -c All -d*" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-Bloodhound*" }
+				Include PROCESS_CMD_LINE { -v "*Get-BloodHoundData*" }
+
+					}
+			Target {
+				Match SECTION { Include -access "CREATE" }
+					}
+			}
+   
