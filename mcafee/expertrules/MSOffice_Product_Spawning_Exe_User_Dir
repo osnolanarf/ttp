@@ -1,0 +1,28 @@
+Title: MS Office Product Spawning Exe in User Dir
+
+Description: Detects an executable in the users directory started from Microsoft Word, Excel, Powerpoint, Publisher or Visio
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_office_spawn_exe_from_users_directory.yml
+
+MITRE ATT&CK: 
+	Tactics: execution
+	Techniques: t1059, t1202
+
+Detection:
+  McAfee ENS Expert Rule:
+    Rule {
+			Process {
+				Include OBJECT_NAME {-v "*\\WINWORD.EXE"}
+				Include OBJECT_NAME {-v "*\\EXCEL.EXE"}
+				Include OBJECT_NAME {-v "*\\OUTLOOK.EXE"}
+				Include OBJECT_NAME {-v "*\\POWERPNT.exe"}
+				Include OBJECT_NAME {-v "*\\MSPUB.exe"}
+				Include OBJECT_NAME {-v "*\\VISIO.exe"}
+					}
+			Target {
+			Match PROCESS {
+			Include OBJECT_NAME {-v "C:\users\\*.exe"}
+			
+							}              
+					}
+			}
