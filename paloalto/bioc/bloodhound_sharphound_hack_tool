@@ -1,1 +1,14 @@
 Title: Bloodhound and Sharphound hack tool
+
+Description: Detects command line parameters used by Bloodhound and Sharphound hack tools
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_hack_bloodhound.yml
+
+MITRE ATT&CK: 
+	Tactics: discovery
+	Techniques: t1087
+
+Detection:
+	PaloAlto XDR BIOC:
+		Process  [ action type = execution  AND name = Bloodhound.exe|SharpHound.exe  AND cmd = *-CollectionMethod All*|*.exe -c All -d*|*Invoke-Bloodhound*|*Get-BloodHoundData*  ]
+    
