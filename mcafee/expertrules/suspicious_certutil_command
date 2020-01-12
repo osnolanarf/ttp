@@ -1,0 +1,36 @@
+Title: Suspicious Certutil Command
+
+Description: Detects a suspicious Microsoft certutil execution with sub commands like 'decode' sub command, which is sometimes used to decode malicious code with the built-in certutil utility
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_susp_certutil_command.yml
+
+MITRE ATT&CK: 
+	Tactics: defense evasion
+	Techniques: t1140, t1105
+
+Detection:
+  McAfee ENS Expert Rule:
+		Rule {
+			Process {
+				Include OBJECT_NAME { -v "certutil.exe" }
+				Include PROCESS_CMD_LINE { -v "* -decode *" }
+				Include PROCESS_CMD_LINE { -v "* /decode *" }
+				Include PROCESS_CMD_LINE { -v "* -decodehex *" }
+				Include PROCESS_CMD_LINE { -v "* /decodehex *" }
+				Include PROCESS_CMD_LINE { -v "* -urlcache *" }
+				Include PROCESS_CMD_LINE { -v "* /urlcache *" }
+				Include PROCESS_CMD_LINE { -v "* -verifyctl *" }
+				Include PROCESS_CMD_LINE { -v "* /verifyctl *" }
+				Include PROCESS_CMD_LINE { -v "* -encode *" }
+				Include PROCESS_CMD_LINE { -v "* /encode *" }
+				Include PROCESS_CMD_LINE { -v "*certutil* -URL*" }
+				Include PROCESS_CMD_LINE { -v "*certutil* /URL*" }
+				Include PROCESS_CMD_LINE { -v "*certutil* -ping*" }
+				Include PROCESS_CMD_LINE { -v "*certutil* /ping*" }
+ 
+
+					}
+			Target {
+				Match SECTION { Include -access "CREATE" }
+					}
+			}
