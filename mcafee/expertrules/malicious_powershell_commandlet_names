@@ -1,0 +1,117 @@
+Title: Malicious PowerShell Commandlet Names
+
+Description: Detects the creation of known powershell scripts for exploitation
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/sysmon/sysmon_powershell_exploit_scripts.yml
+
+MITRE ATT&CK: 
+	Tactics: execution
+	Techniques: t1086
+
+Detection:
+  McAfee ENS Expert Rule:
+		Rule {
+			Process {
+				Include OBJECT_NAME { -v "*PowerShell*" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-DllInjection.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-WmiCommand.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-GPPPassword.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-Keystrokes.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-VaultCredential.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-CredentialInjection.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-Mimikatz.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-NinjaCopy.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-TokenManipulation.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Out-Minidump.ps1" }
+				Include PROCESS_CMD_LINE { -v "*VolumeShadowCopyTools.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-ReflectivePEInjection.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-TimedScreenshot.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Find-GPOLocation.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-ACLScanner.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-DowngradeAccount.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-ServiceUnquoted.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-ServiceFilePermission.ps1"}
+				Include PROCESS_CMD_LINE { -v "*Get-ServicePermission.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-ServiceAbuse.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Install-ServiceBinary.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-RegAutoLogon.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-VulnAutoRun.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-VulnSchTask.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-UnattendedInstallFile.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-WebConfig.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-ApplicationHost.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-RegAlwaysInstallElevated.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-Unconstrained.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Add-RegBackdoor.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Add-ScrnSaveBackdoor.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Gupt-Backdoor.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-ADSBackdoor.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Enabled-DuplicateToken.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-PsUaCme.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Remove-Update.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Check-VM.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-LSASecret.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-PassHashes.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Show-TargetScreen.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Port-Scan.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-PoshRatHttp.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-PowerShellTCP.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-PowerShellWMI.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Add-Exfiltration.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Add-Persistence.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Do-Exfiltration.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Start-CaptureServer.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-ShellCode.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-ChromeDump.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-ClipboardContents.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-FoxDump.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-IndexedItem.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-Screenshot.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-Inveigh.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-NetRipper.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-EgressCheck.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-PostExfil.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-PSInject.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-RunAs.ps1" }
+				Include PROCESS_CMD_LINE { -v "*MailRaider.ps1" }
+				Include PROCESS_CMD_LINE { -v "*New-HoneyHash.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Set-MacAttribute.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-DCSync.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-PowerDump.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Exploit-Jboss.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-ThunderStruck.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-VoiceTroll.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Set-Wallpaper.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-InveighRelay.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-PsExec.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-SSHCommand.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-SecurityPackages.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Install-SSP.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-BackdoorLNK.ps1" }
+				Include PROCESS_CMD_LINE { -v "*PowerBreach.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-SiteListPassword.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-System.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-BypassUAC.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-Tater.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-WScriptBypassUAC.ps1" }
+				Include PROCESS_CMD_LINE { -v "*PowerUp.ps1" }
+				Include PROCESS_CMD_LINE { -v "*PowerView.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Get-RickAstley.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Find-Fruit.ps1" }
+				Include PROCESS_CMD_LINE { -v "*HTTP-Login.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Find-TrustedDocuments.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-Paranoia.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-WinEnum.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-ARPScan.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-PortScan.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-ReverseDNSLookup.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-SMBScanner.ps1" }
+				Include PROCESS_CMD_LINE { -v "*Invoke-Mimikittenz.ps1" }
+ 
+
+				}
+		Target {
+			Match SECTION { Include -access "CREATE" }
+				}
+			}
+
