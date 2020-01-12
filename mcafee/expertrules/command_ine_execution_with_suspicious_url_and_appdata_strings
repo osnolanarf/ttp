@@ -1,0 +1,23 @@
+Title: Command Line Execution with suspicious URL and AppData Strings
+
+Description: Detects a suspicious command line execution that includes an URL and AppData string in the command line parameters as used by several droppers (js/vbs> powershell)
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_susp_cmd_http_appdata.yml
+
+MITRE ATT&CK: 
+	Tactics: execution
+	Techniques: t1059
+
+Detection:
+  McAfee ENS Expert Rule:
+		Rule {
+			Process {
+				Include OBJECT_NAME { -v "cmd.exe" }
+				Include PROCESS_CMD_LINE { -v "*/c*http://*%AppData%*" }
+				Include PROCESS_CMD_LINE { -v "*/c*https://*%AppData%*" }
+		
+					}
+			Target {
+				Match SECTION { Include -access "CREATE EXECUTE"" }
+					}
+			}
