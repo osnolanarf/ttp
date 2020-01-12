@@ -1,0 +1,14 @@
+Title: Command Line Execution with suspicious URL and AppData Strings
+
+Description: Detects a suspicious command line execution that includes an URL and AppData string in the command line parameters as used by several droppers (js/vbs>powershell)
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_susp_cmd_http_appdata.yml
+
+MITRE ATT&CK: 
+	Tactics: execution
+	Techniques: t1059
+
+Detection:
+	PaloAlto XDR BIOC:
+		Process  [ action type = execution  AND name = cmd.exe  AND cmd = */c*http://*%AppData%*|*/c*https://*%AppData%*  ]
+	
