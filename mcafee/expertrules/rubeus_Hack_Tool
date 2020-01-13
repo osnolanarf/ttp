@@ -1,0 +1,29 @@
+Title: Rubeus Hack Tool
+
+Description: Detects command line parameters used by Rubeus hack tool
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_hack_rubeus.yml 
+
+MITRE ATT&CK: 
+	Tactics: credential access
+	Techniques: t1003
+
+Detection:
+  McAfee ENS Expert Rule:
+		Rule {
+			Process {
+				Include OBJECT_NAME { -v "rubeus.exe" }
+				Include PROCESS_CMD_LINE { -v "*asreproast*" }
+				Include PROCESS_CMD_LINE { -v "*dump /service:krbtgt*" }
+				Include PROCESS_CMD_LINE { -v "*kerberoast*" }
+				Include PROCESS_CMD_LINE { -v "*createnetonly /program:*" }
+				Include PROCESS_CMD_LINE { -v "*ptt /ticket:*" }
+				Include PROCESS_CMD_LINE { -v "*/impersonateuser:*" }
+				Include PROCESS_CMD_LINE { -v "*renew /ticket:*" }
+				Include PROCESS_CMD_LINE { -v "*asktgt /user:*" }
+				Include PROCESS_CMD_LINE { -v "*harvest /interval:*" }
+					}
+			Target {
+				Match SECTION { Include -access "EXECUTE" }
+					}
+			}
