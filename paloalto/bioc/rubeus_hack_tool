@@ -1,0 +1,13 @@
+Title: Rubeus Hack Tool
+
+Description: Detects command line parameters used by Rubeus hack tool
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_hack_rubeus.yml 
+
+MITRE ATT&CK: 
+	Tactics: credential access
+	Techniques: t1003
+
+Detection:
+	PaloAlto XDR BIOC: 
+		Process  [ action type = execution  AND name = rubeus.exe  AND cmd = * asreproast *|* dump /service:krbtgt *|* kerberoast *|* createnetonly /program:*|* ptt /ticket:*|* /impersonateuser:*|* renew /ticket:*|* asktgt /user:*|* harvest /interval:*  ]
