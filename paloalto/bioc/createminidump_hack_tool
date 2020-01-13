@@ -1,0 +1,13 @@
+Title: CreateMiniDump Hacktool
+
+Description: Detects the use of CreateMiniDump hack tool used to dump the LSASS process memory for credential extraction on the attacker's machine
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_hktl_createminidump.yml
+
+MITRE ATT&CK: 
+	Tactics: credential access
+	Techniques: t1003
+
+Detection:
+	PaloAlto XDR BIOC:
+		File  [ action type = Create AND name = *.lsass.dmp ]  AND Process  [ name = CreateMiniDump.exe ]
