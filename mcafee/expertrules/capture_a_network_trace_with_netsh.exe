@@ -1,0 +1,25 @@
+Title: Capture a Network Trace with netsh.exe
+
+Description: Detects capture a network trace via netsh.exe trace functionality
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_netsh_packet_capture.yml
+
+
+MITRE ATT&CK: 
+	Tactics: discovery
+	Techniques: t1040
+
+Detection:
+	McAfee ENS Expert Rule:
+		Rule {
+			Process {
+				Include OBJECT_NAME { -v "netsh.exe" }
+				Include PROCESS_CMD_LINE { -v "* trace*" }
+				Include PROCESS_CMD_LINE { -v "* start*" }
+					}
+			Target {
+				Match SECTION { Include -access "EXECUTE" }
+					}
+			}
+	
+	
