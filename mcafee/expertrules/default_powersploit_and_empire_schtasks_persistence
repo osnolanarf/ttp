@@ -1,0 +1,24 @@
+Title: Default PowerSploit and Empire Schtasks Persistence
+
+Description: Detects the creation of a schtask via PowerSploit or Empire Default Configuration.
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_powersploit_empire_schtasks.yml
+
+MITRE ATT&CK: 
+	Tactics: Persistence
+	Techniques: 
+
+Detection:
+  McAfee ENS Expert Rule:
+		Rule {
+			Process {
+				Include OBJECT_NAME { -v "powershell.exe*" }
+				Include PROCESS_CMD_LINE { -v "*schtasks*/Create*ONLOGON*" }
+				Include PROCESS_CMD_LINE { -v "*schtasks*/Create*DAILY*" }
+				Include PROCESS_CMD_LINE { -v "*schtasks*/Create*ONIDLE*" }
+					}
+			Target {
+				Match SECTION { Include -access "EXECUTE CREATE" }
+					}
+			}
+	
