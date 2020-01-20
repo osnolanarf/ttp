@@ -1,0 +1,14 @@
+Title: Capture a Network Trace with netsh.exe
+
+Description: Detects capture a network trace via netsh.exe trace functionality
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_netsh_packet_capture.yml
+
+
+MITRE ATT&CK: 
+	Tactics: discovery
+	Techniques: t1040
+
+Detection:
+	PaloAlto XDR BIOC: 
+		Process  [ action type = execution  AND name = netsh.exe  AND cmd = *trace*|*start*  ]
