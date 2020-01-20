@@ -1,0 +1,13 @@
+Title: Default PowerSploit and Empire Schtasks Persistence
+
+Description: Detects the creation of a schtask via PowerSploit or Empire Default Configuration.
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_powersploit_empire_schtasks.yml
+
+MITRE ATT&CK: 
+	Tactics: Persistence
+	Techniques: 
+
+Detection:
+	PaloAlto XDR BIOC:
+		Process  [ action type = execution  AND name = powershell.exe  AND cmd = *schtasks*/Create*ONLOGON*|*schtasks*/Create*DAILY*|*schtasks*/Create*ONIDLE*  ]
