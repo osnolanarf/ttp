@@ -1,0 +1,13 @@
+Title: Screen captures NirCmd
+
+Description: An adversary may take screen captures either to gather sensitive information or get a graphical view of what type of system they have access to
+
+References: https://www.jaiminton.com/Mitreatt&ck/T1113#
+
+MITRE ATT&CK: 
+	Tactics: Collection
+	Techniques: T1113
+
+Detection:
+	PaloAlto XDR BIOC:
+		Process  [ action type = execution  AND name = nircmd.exe  AND cmd = *savescreenshot*  ]
