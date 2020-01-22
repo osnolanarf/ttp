@@ -1,0 +1,23 @@
+Title: Screen captures NirCmd
+
+Description: An adversary may take screen captures either to gather sensitive information or get a graphical view of what type of system they have access to
+
+References: https://www.jaiminton.com/Mitreatt&ck/T1113#
+
+MITRE ATT&CK: 
+	Tactics: Collection
+	Techniques: T1113
+
+Detection:
+	McAfee ENS Expert Rule:
+		Rule {
+			Process {
+				Include OBJECT_NAME { -v "nircmd.exe" }
+				Include PROCESS_CMD_LINE { -v "*savescreenshot*" }
+					}
+			Target {
+				Match SECTION { Include -access "EXECUTE CREATE" }
+					}
+			}
+	
+	
