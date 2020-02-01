@@ -1,0 +1,20 @@
+Title: System File Execution Location Anomaly
+
+Description:
+
+References:
+
+MITRE ATT&CK: 
+	Tactics:
+	Techniques:
+
+Detection:
+	PaloAlto XDR BIOC:
+  Process  [ action type = execution AND path != C:\Windows\System32\smss.exe AND name = smss.exe ]
+  Process  [ action type = execution  AND name = winlogon.exe  AND path != C:\Windows\System32\winlogon.exe  ]
+  Process  [ action type = execution  AND name = csrss.exe  AND path != C:\Windows\System32\csrss.exe  ]
+  Process  [ action type = execution  AND name = wininit.exe  AND path != C:\Windows\System32\wininit.exe  ]
+  Process  [ action type = execution  AND name = services.exe  AND path != C:\Windows\System32\services.exe  ]
+  Process  [ action type = execution AND name = svchost.exe AND path != C:\Windows\System32\svchost.exe|C:\Windows\SysWOW64\svchost.exe ]
+  Process  [ action type = execution  AND name = lsass.exe  AND path != C:\Windows\System32\lsass.exe  ]
+  Process  [ action type = execution  AND path != C:\Windows\System32\lsm.exe  AND name = lsm.exe  ]
