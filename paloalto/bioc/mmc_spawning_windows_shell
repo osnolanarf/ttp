@@ -1,0 +1,14 @@
+Title: MMC Spawning Windows Shell
+
+Description: Detects a Windows command line executable started from MMC.
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_mmc_spawn_shell.yml
+
+MITRE ATT&CK: 
+	Tactics: lateral movement
+	Techniques: t1175
+
+Detection:
+	PaloAlto XDR BIOC:
+		Process  [ action type = execution  AND name = mshta.exe  ] AND Process  [ name = cmd.exe|powershell.exe|pwscript.exe|cscript.exe|sh.exe|bash.exe|reg.exe|regsvr32.exe  ]
+	
