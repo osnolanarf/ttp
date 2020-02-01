@@ -1,0 +1,31 @@
+Description: Detects a Windows command line executable started from MMC.
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_mmc_spawn_shell.yml
+
+MITRE ATT&CK: 
+	Tactics: lateral movement
+	Techniques: t1175
+
+Detection:
+	McAfee ENS Expert Rule:
+		Rule {
+			Process {
+				Include OBJECT_NAME {-v "mmc.exe"}
+
+					}
+		Target {
+			Match PROCESS {
+				Include OBJECT_NAME {-v "**\\cmd.exe"}
+				Include OBJECT_NAME {-v "**\\powershell.exe"}
+				Include OBJECT_NAME {-v "**\\pwscript.exe"}
+				Include OBJECT_NAME {-v "**\\cscript.exe"}
+				Include OBJECT_NAME {-v "**\\sh.exe"}
+				Include OBJECT_NAME {-v "**\\bash.exe"}
+				Include OBJECT_NAME {-v "**\\reg.exe"}
+				Include OBJECT_NAME {-v "**\\regsvr32.exe"}
+				
+				
+						}              
+				}
+			}
+
