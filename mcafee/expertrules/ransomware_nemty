@@ -1,0 +1,27 @@
+Title: Ransomware_Nemty
+
+Description: detection Nemty ransomware
+
+References:
+  https://app.any.run/tasks/e1862f51-c498-4747-a804-0a9af94b3d70/
+  https://any.run/malware-trends/nemty
+  https://any.run/report/a7558decb9516122781243e791c982977660152813817fb7ed00359365fcb0d3/e1862f51-c498-4747-a804-0a9af94b3d70#registry
+
+
+MITRE ATT&CK: 
+	Tactics:
+	Techniques:
+
+Detection:
+	McAfee ENS Expert Rule:
+Rule {    
+  Process {       
+    Include OBJECT_NAME { -v *.exe  }   
+    }    
+  Target {    
+    Match KEY {        
+      Include OBJECT_NAME {  -v "HKCU\\Software\NEMTY" }  
+      Include -access "CREATE WRITE"     
+          }   
+      }  
+  }
