@@ -1,0 +1,13 @@
+Title: Remote Desktop
+
+Description: Unauthorized RDP access control
+
+References:
+
+MITRE ATT&CK: 
+	Tactics:
+	Techniques:
+
+Detection:
+	PaloAlto XDR BIOC:
+    Network  [ action type = Outgoing  AND remote port = 3389  ] AND Process  [ name != mstsc.exe|mRemoteNG.exe|  ]
