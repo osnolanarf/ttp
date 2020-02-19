@@ -1,0 +1,13 @@
+Title: Whoami as LOCAL_SYSTEM
+
+Description: Detects the execution of whoami as LOCAL_SYSTEM, often used after privilege escalation by attackers who want to evaluate the new user context
+
+References: https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_susp_whoami_localsystem.yml
+
+MITRE ATT&CK: 
+	Tactics: attack.discovery
+	Techniques: t1033
+
+Detection:
+	PaloAlto XDR BIOC:
+		Process  [ action type = execution  AND name = whoami.exe  AND user name = NT AUTHORITY\SYSTEM  ]
