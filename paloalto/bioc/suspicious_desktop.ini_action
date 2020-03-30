@@ -1,0 +1,15 @@
+Title: Suspicious desktop.ini Action
+
+Description: Detects unusual processes accessing desktop.ini, which can be leveraged to alter how Explorer displays a folder's content (i.e. renaming files) without changing them on disk.
+
+References: https://isc.sans.edu/forums/diary/Desktopini+as+a+postexploitation+tool/25912/
+
+MITRE ATT&CK: 
+	Tactics: persistence
+	Techniques: t1023
+
+Detection:
+	PaloAlto XDR BIOC:
+		File  [ action type = Create  AND path =  C:\Users\*\Desktop\desktop.ini  ] AND Process  [ path != C:\Windows\explorer.exe|C:\Windows\System32\msiexec.exe|C:\Windows\System32\mmc.exe  ]
+    
+    
